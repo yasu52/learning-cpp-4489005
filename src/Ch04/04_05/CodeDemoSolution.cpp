@@ -26,14 +26,10 @@ int main(){
 
     // Calculate the GPA for the selected student.
     float total_credits = 0.0f;
-    for (int i = 0; i < grades.size(); i++) {
-        int student_id = grades[i].get_student_id();
-        if (id != student_id) continue;
-
-        int target_course_id = grades[i].get_course_id();
-        char grade = grades[i].get_grade();
+    for (Grade& grd : grades) {
+        if (id != grd.get_student_id()) continue;
         float grade_point;
-        switch (grade) {
+        switch (grd.get_grade()) {
             case 'A':
                 grade_point = 4.0f;
                 break;
@@ -54,8 +50,7 @@ int main(){
                 break;
         }
         for (int i = 0; i < courses.size(); i++){
-            int course_id = courses[i].get_id();
-            if (course_id == target_course_id) {
+            if (courses[i].get_id() == grd.get_course_id()) {
                 GPA += (grade_point * courses[i].get_credits());
                 total_credits += courses[i].get_credits();
             }
